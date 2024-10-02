@@ -4,13 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PWA</title>
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Vanilla PWA</h1>
-  <p>See README.md for details.</p>
-  
+  <p>A barebones example of all PWA requirements and features.</p>
+  <h2>Branded UX</h2>
+  <p>For a more integrated design, include:</p>
+  <ul>
+    <li>They meet these requirements...</li>
+  </ul>
+  <h2>Installability</h2>
+  <p>A PWA can be installed in a similar way as a native app if:</p>
+  <ul>
+    <li>Using HTTPS</li>
+    <li>Has a manifest.json</li>
+  </ul>
+  <h2>Discoverability</h2>
+  <p>PWAs are websites and so they can be linked to by other websites and found on search engines like any other website. In addition, a PWA can be found on app stores if:</p>
+  <ul>
+    <li>It meets installability requirements</li>
+    <li>It has been packaged and published to the store (see ...)</li>
+  </ul>
+  <h2>Offline support</h2>
+  <p>Enable an offline experience with a Service Worker. See <a href="service-worker.js" target="_blank">service-worker.js</a> to learn how.</p>
+  <h2>Web Share</h2>
+  <p>Invoke the device's share feature with the Web Share API.</p>
+  <button id="share">Share</button>
+  <script>
+    /**
+     * Web Share API {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API}
+     */
+    const shareButton = document.getElementById('share');
+    shareButton.addEventListener('click', async () => {
+      /**
+       * See {@link https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#parameters}
+       */
+      const data = {
+        title: 'Vanilla PWA',
+        text: 'A barebones example of all PWA requirements and features.',
+        url: "https://developer.mozilla.org",
+      };
+
+      await navigator.share(data);
+    });
+  </script>
+
   <script>
     // Register a Service Worker for this PWA.
     window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
